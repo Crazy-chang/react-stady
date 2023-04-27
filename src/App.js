@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import Login from "./page/login/index"
+import LayoutPage from "./layout/index"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
+import { Component } from 'react';
+
+class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.initConfig()
+    this.token = '66'
+  }
+
+  initConfig() {
+
+  }
+//   {
+//   router.map((item) => (
+//     <Route path=fitem.pathi exact render=fprops => fitem .auth
+//     ? (auth_token ? <item.component {...props} /> : <Login />): (<item.component [...props]/>)}}/ >))
+// }
+render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        {
+          this.token ?
+            <Route path='/' component={LayoutPage} /> : <Route path='/login' component={Login} />
+        }
+
+        <Redirect from='/' to='/login' />
+      </Switch>
+    </BrowserRouter>
+
   );
+}
 }
 
 export default App;
