@@ -9,33 +9,29 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.initConfig()
-    this.token = '66'
+
+    this.token = localStorage.getItem('token')
   }
 
-  initConfig() {
+  //   {
+  //   router.map((item) => (
+  //     <Route path=fitem.pathi exact render=fprops => fitem .auth
+  //     ? (auth_token ? <item.component {...props} /> : <Login />): (<item.component [...props]/>)}}/ >))
+  // }
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          {
+            this.token ?
+              <Route path='/' component={LayoutPage} /> : <Route path='/login' component={Login} />
+          }
+          <Redirect from='/' to='/login' />
+        </Switch>
+      </BrowserRouter>
 
+    );
   }
-//   {
-//   router.map((item) => (
-//     <Route path=fitem.pathi exact render=fprops => fitem .auth
-//     ? (auth_token ? <item.component {...props} /> : <Login />): (<item.component [...props]/>)}}/ >))
-// }
-render() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        {
-          this.token ?
-            <Route path='/' component={LayoutPage} /> : <Route path='/login' component={Login} />
-        }
-
-        <Redirect from='/' to='/login' />
-      </Switch>
-    </BrowserRouter>
-
-  );
-}
 }
 
 export default App;

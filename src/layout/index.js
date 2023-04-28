@@ -7,8 +7,11 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import { Route, Switch } from "react-router-dom"
-import login from '../page/login/index'
+import { Route, Switch, useHistory, Redirect } from "react-router-dom"
+import './index.css'
+import homePage from '../page/home/index'
+import testonePage from '../page/test1/index'
+import nonePage from '../page/none/index'
 
 const { Header, Sider, Content } = Layout;
 
@@ -18,31 +21,49 @@ const LayoutPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const routeList = [
+    {
+      key: '/testPage',
+      icon: <UserOutlined />,
+      label: '菜单1'
+    },
+    {
+      key: '/testonePage',
+      icon: <VideoCameraOutlined />,
+      label: '菜单 2',
+      children: [
+        {
+          key: '/testonePage',
+          icon: <UserOutlined />,
+          label: '菜单2-1'
+        }
+      ]
+    },
+    {
+      key: '/nonePage',
+      icon: <UploadOutlined />,
+      label: '菜单 3',
+    },
+  ]
+
+  const history = useHistory()
+
+  const onClickMenu = (e) => {
+    console.log('点击菜单', e)
+    history.push(e.key);
+  }
+
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider className='sider' trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" />
         <Menu
           theme="dark"
+
           mode="inline"
           defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <UserOutlined />,
-              label: 'nav 1',
-            },
-            {
-              key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
-            },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
-            },
-          ]}
+          items={routeList}
+          onClick={onClickMenu}
         />
       </Sider>
       <Layout>
@@ -66,15 +87,15 @@ const LayoutPage = () => {
             background: colorBgContainer,
           }}
         >
-            666
-          
-            <Switch>
-                <Route path='/login' Component={login}></Route>
-                <Route path='/'></Route>
-                <Route render={() => {
-                    <div>404</div>
-                }} />
-            </Switch>
+          <Switch>
+            <Route path='/home' component={homePage}></Route>
+            <Route path='/testonePage' component={testonePage}></Route>
+            <Route path='/nonePage' component={nonePage}></Route>
+            <Route render={() => {
+              <div>404</div>
+            }} />
+            <Redirect from='/' to='/home' />
+          </Switch>
         </Content>
       </Layout>
     </Layout>

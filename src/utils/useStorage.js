@@ -1,46 +1,73 @@
+class Storage {
+    private static instace: Storage;
+    private store = new Map();
+    private type: 'localStorage' | 'sessionStorage' | 'memory' = 'memory';
+    private salt = 'yunxin_h5_';
 
-import { useEffect, useState } from 'react';
+    constructor(type?: 'localStorage' | 'sessionStorage' | 'memory') {
+        if (type) {
+            this.type = type;
+        }
+    }
 
-function useStorage(key, value, type) {
-    const [storedValue, setStoredValue] = useState(key);
-
-    const getStorage = () => {
-
-        switch (type) {
+    public get(key: string): any {
+        let value;
+        switch (this.type) {
+            case 'memory':
+                return this.store.get(key);
             case 'localStorage':
-                localStorage.setItem(key, value);
+                value = localStorage.getItem(`${this.salt}${key}`);
+                if (value) {
+                    return JSON.parse(value);
+                }
+                return value;
+            case 'sessionStorage':
+                value = sessionStorage.getItem(`${this.salt}${key}`);
+                if (value) {
+                    return JSON.parse(value);
+                }
+                return value;
+        }
+    }
+
+    public set(key: string, value: any) {
+        switch (this.type) {
+            case 'memory':
+                this.store.set(key, value);
+                break;
+            case 'localStorage':
+                localStorage.setItem(`${this.salt}${key}`, JSON.stringify(value));
                 break;
             case 'sessionStorage':
-                sessionStorage.setItem(key, value);
+                sessionStorage.setItem(`${this.salt}${key}`, JSON.stringify(value));
                 break;
         }
-        localStorage.setItem(key, value);
-        if (value !== storedValue) {
-            setStoredValue(value);
-        }
-    };
-    const setStorage = (value) => {
-        switch(type){
-            case ''
-        }
-        localStorage.setItem(key, value);
-        if (value !== storedValue) {
-            setStoredValue(value);
-        }
-    };
+    }
 
-    const removeStorage = () => {
-        localStorage.removeItem(key);
-    };
-
-    useEffect(() => {
-        const storageValue = localStorage.getItem(key);
-        if (storageValue) {
-            setStoredValue(storageValue);
+    public remove(key: string) {
+        switch (this.type) {
+            case 'memory':
+                this.store.delete(key);
+                break;
+            case 'localStorage':
+                localStorage.removeItem(`${this.salt}${key}`);
+                break;
+            case 'sessionStorage':
+                sessionStorage.removeItem(`${this.salt}${key}`);
+                break;
         }
-    }, []);
+    }
 
-    return [storedValue, getStorage, setStorage, removeStorage];
+    static getInstance(type?: 'localStorage' | 'sessionStorage' | 'memory') {
+        if (!this.instace) {
+            this.instace = new Storage(type);
+        }
+        return this.instace;
+    }
 }
 
-export default useStorage;
+export default Storage;
+
+export const sessionIns = Storage.getInstance('sessionStorage');
+export const localIns = Storage.getInstance('localStorage');
+export const memoryIns = Storage.getInstance('memory');

@@ -1,0 +1,11 @@
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 300px;
+}
+.formBox {
+    margin: auto;
+}
+.butClick {
+    text-align: center;
+}
