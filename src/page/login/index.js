@@ -1,19 +1,23 @@
+import React from 'react'
 import { Button, Form, message, Input } from 'antd';
 import { useHistory } from 'react-router-dom'
 import './index.css'
+import axios from 'axios'
+import store from '../../redux/index';
 
 const Login = () => {
 
     const history = useHistory()
     const onFinish = (values) => {
-        console.log('Success:', values);
-        localStorage.setItem('token', '假装是token')
-        message.success('登录成功')
-        history.push('/')
+        axios.post('/user/login',values).then(res => {
+            store.dispatch({type:'SETTOKEN','token':res.data.token})
+            message.success('登录成功')
+            history.push('/homePage')
+        })
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
-        message.error('登录失败')
+        message.error('账号或密码错误')
     };
     return (
         <div className='loginPage'>
@@ -32,19 +36,19 @@ const Login = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="用户名"
+                    label="账 号"
                     name="username"
                     rules={[
                         {
                             required: true,
-                            message: '请输入用户名',
+                            message: '请输入账号',
                         },
                     ]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="密码"
+                    label="密 码"
                     name="password"
                     rules={[
                         {

@@ -1,37 +1,34 @@
 import './App.css';
 
 import Login from "./page/login/index"
-import LayoutPage from "./layout/index"
+import LayoutPage from "./page/layout/index"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { Component } from 'react';
-
+import { connect } from 'react-redux';
 class App extends Component {
 
   constructor(props) {
     super(props)
-
-    this.token = localStorage.getItem('token')
+    console.log("") 
   }
-
-  //   {
-  //   router.map((item) => (
-  //     <Route path=fitem.pathi exact render=fprops => fitem .auth
-  //     ? (auth_token ? <item.component {...props} /> : <Login />): (<item.component [...props]/>)}}/ >))
-  // }
+  
   render() {
     return (
       <BrowserRouter>
         <Switch>
           {
-            this.token ?
+            this.props.tokens || sessionStorage.getItem('token') ?
               <Route path='/' component={LayoutPage} /> : <Route path='/login' component={Login} />
           }
           <Redirect from='/' to='/login' />
         </Switch>
       </BrowserRouter>
-
     );
   }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+export default connect(mapStateToProps)(App);

@@ -1,12 +1,26 @@
 
-function Test () {
+import { useEffect } from 'react';
+import axios from 'axios'
+function Home () {
 
+    const getData = () => {
+        axios
+            .get('/user/list')
+            .then((res) => {
+                console.log("==", res)
+            })
+    };
+
+    useEffect(() => {
+        getData()
+    }, [])
+    
     return (
         <div>
-            Test
+            home
             
         </div>
     )
 }
 
-export default Test;
+export default Home;

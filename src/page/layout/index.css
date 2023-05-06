@@ -1,0 +1,13 @@
+.ant-layout-sider-children {
+    height: 100vh !important;
+}
+
+.headerCla {
+   display: flex; 
+   justify-content: space-between;
+}
+
+.contentBox {
+    margin: '24px 16px';
+    padding: 24px;
+}
