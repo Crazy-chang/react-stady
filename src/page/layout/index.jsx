@@ -4,7 +4,8 @@ import { Layout, Menu, Button, theme, message } from 'antd';
 import { useHistory } from "react-router-dom"
 import './index.css'
 import store from '../../redux/index'
-import { RouteList, routeItems} from '../routes/index'
+import { RouteList, routeItems, flatRoute} from '../routes/index'
+import Navbar from "./navbar"
 
 const { Header, Sider, Content } = Layout;
 
@@ -18,8 +19,21 @@ const LayoutPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const flatRouteList = flatRoute()
+  
   const onClickMenu = (e) => {
     history.push(e.key);
+
+    if(e.keyPath.length > 0){
+      const arr = []
+      e.keyPath.forEach(it => {
+        for(let i = 0; i < flatRouteList.length; i++){
+          if(it === flatRouteList[i].key){
+            arr.push(flatRouteList[i])
+          } 
+        }
+      });
+    }
   }
 
   const outLogin = () => {
@@ -46,18 +60,22 @@ const LayoutPage = () => {
       </Sider>
       <Layout>
         <Header className='headerCla' style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
+          <div className='headerCla'>
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
+            <div>用户管理 / 用户列表页</div>
+          </div>
           <div style={{padding: '0 20px'}} onClick={outLogin}>退出</div>
         </Header>
+        <Navbar />
         <Content
           style={{
             margin: '20px',

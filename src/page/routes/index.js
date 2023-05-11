@@ -9,6 +9,7 @@ import { Route, Switch, Redirect } from "react-router-dom"
 
 import HomePage from '../home/index'
 import UserList from '../user/index'
+import UserListDetail from '../user/detail'
 import NonePage from '../none/index'
 
 const routeItems = [
@@ -21,15 +22,21 @@ const routeItems = [
   {
     key: '/father',
     icon: <MenuFoldOutlined />,
-    label: '菜单 2',
+    label: '用户管理',
     component:null,
     children: [
       {
         key: '/father/userList',
         icon: <VideoCameraOutlined />,
-        label: '菜单2-1',
+        label: '用户列表',
         component:UserList
-      }
+      },
+      // {
+      //   key: '/father/userDetail/detail',
+      //   icon: <VideoCameraOutlined />,
+      //   label: '用户详情',
+      //   component:UserListDetail
+      // },
     ]
   },
   {
@@ -40,17 +47,30 @@ const routeItems = [
   },
 ]
 
+const flatRoute = () => {
+  const arr = []
+  function flatFun(list){
+    list.forEach(it => {
+      const { key,label} = it
+      if(it.children){
+        arr.push({ key,label})
+        flatFun(it.children)
+      }else {
+        arr.push({ key,label})
+      }
+    })
+  }
+  flatFun(routeItems)
+  return arr
+}
+
 const RouteList = () => {
 
     return (
         <Switch>
-          {/* {
-            routeItems.map((item) => (
-              <Route key={item.key} path={item.key} exact component={item.component} ></Route>
-            ))
-          } */}
             <Route path='/homePage' component={HomePage}></Route>
             <Route path='/father/userList' component={UserList}></Route>
+            <Route path='/father/userDetail/detail' component={UserListDetail}></Route>
             <Route path='/nonePage' component={NonePage}></Route>
             <Route render={() => {
               <div>404</div>
@@ -62,5 +82,6 @@ const RouteList = () => {
 
 export {
   routeItems,
+  flatRoute,
   RouteList
 };

@@ -1,6 +1,7 @@
-import { Space, Table } from 'antd';
+import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const UserList = () => {
     const columns = [
@@ -20,14 +21,12 @@ const UserList = () => {
             dataIndex: 'tags'
         },
         {
-            title: 'Action',
+            title: '操作',
             key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    Invite {record.name}
-                </Space>
+            render: (_) => (
+                <Link to="/father/userDetail/detail">查看详情</Link>
             ),
-        },
+        }
     ];
 
     const [list, setList] = useState([{
@@ -45,7 +44,7 @@ const UserList = () => {
     {
         key: '3',
         name: 'Joe Black',
-        age: 32,
+        age: 321,
         tags: ['cool', 'teacher'],
     }])
 

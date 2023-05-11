@@ -4,7 +4,8 @@ import { legacy_createStore as createStore } from 'redux'
 const initData = {
   token: null,
   status: false,
-  userInfo: {}
+  userInfo: {},
+  breadcrumbList:[]
 }
 
 function stores(state = initData, action) {
@@ -17,6 +18,13 @@ function stores(state = initData, action) {
         sessionStorage.clear()
       }
       return { ...state, token };
+    }
+    case 'BREADCRUMB': {
+      const { breadcrumbList } = action
+      return {
+        ...state,
+        breadcrumbList
+      }
     }
     default:
       return state;
