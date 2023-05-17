@@ -68,11 +68,11 @@ const RouteList = () => {
 
     return (
         <Switch>
-            <Route path='/homePage' component={HomePage}></Route>
-            <Route path='/father/userList' component={UserList}></Route>
-            <Route path='/father/userDetail/detail' component={UserListDetail}></Route>
-            <Route path='/nonePage' component={NonePage}></Route>
-            <Route render={() => {
+            <Route exact path='/homePage' component={HomePage}></Route>
+            <Route exact path='/father/userList' component={UserList}></Route>
+            <Route exact path='/father/userDetail/detail/:id' component={UserListDetail}></Route>
+            <Route exact path='/nonePage' component={NonePage}></Route>
+            <Route exact render={() => {
               <div>404</div>
             }} />
             <Redirect from='/' to='/home' />

@@ -23,8 +23,8 @@ const UserList = () => {
         {
             title: '操作',
             key: 'action',
-            render: (_) => (
-                <Link to="/father/userDetail/detail">查看详情</Link>
+            render: (_,row) => (
+                <Link to={`/father/userDetail/detail/${row.age}`}>查看详情</Link>
             ),
         }
     ];
