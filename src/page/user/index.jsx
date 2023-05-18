@@ -1,7 +1,8 @@
-import { Table } from 'antd';
+import { Button, Table, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Popup from './popup';
 
 const UserList = () => {
     const columns = [
@@ -16,43 +17,33 @@ const UserList = () => {
             key: 'age',
         },
         {
-            title: 'Tags',
-            key: 'tags',
-            dataIndex: 'tags'
-        },
-        {
             title: '操作',
             key: 'action',
-            render: (_,row) => (
-                <Link to={`/father/userDetail/detail/${row.age}`}>查看详情</Link>
-            ),
+            render: (_,row) => {
+                return (
+                    <Space>
+                        <Link to={`/father/userDetail/detail/${row.age}`}>查看详情</Link>
+                        <Button onClick={() => handlePopup('ture',row)}>弹窗</Button>
+                    </Space>
+                )
+            }
         }
     ];
 
-    const [list, setList] = useState([{
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 321,
-        tags: ['cool', 'teacher'],
-    }])
+    const [list, setList] = useState([])
+
+    const [popupStatus,setPopupStatus] = useState(false)
+    const [items,setItems] = useState({})
+    const handlePopup = (val = false,items = {}) => {
+        console.log(items,"关闭==", val)
+        setPopupStatus(val)
+        setItems(items)
+    }
 
     const getData = () => {
         axios
             .get('/user/list')
             .then((res) => {
-                console.log("==", res)
                 setList(res.data.list);
             })
     };
@@ -64,6 +55,7 @@ const UserList = () => {
     return (
         <div>
             <Table columns={columns} dataSource={list} />
+            <Popup items={items} visible={popupStatus} handlePopup={handlePopup} />
         </div>
     )
 }
