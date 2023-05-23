@@ -10,3 +10,9 @@
 .butClick {
     text-align: center;
 }
+.filings {
+    color: #888;
+    position: absolute;
+    left:45%;
+    bottom: 10px;
+}

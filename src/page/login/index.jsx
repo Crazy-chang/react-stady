@@ -65,6 +65,7 @@ const Login = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            <a className='filings' href="https://beian.miit.gov.cn/">粤ICP备2021171723号-1</a>
         </div>
     )
 };
