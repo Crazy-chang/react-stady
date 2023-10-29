@@ -78,12 +78,12 @@ const LayoutPage = () => {
         <Navbar />
         <Content
           style={{
-            margin: '20px',
+            margin: '20px 0 20px 20px',
             padding: 20,
             minHeight: 280,
             background: colorBgContainer,
-            height:'100%',
-            overflow: 'auto'
+            height:'80vh',
+            'overflow-y': 'scroll'
           }}
         >
           <RouteList />

@@ -16,33 +16,77 @@ const routeItems = [
   {
     key: '/homePage',
     icon: <UserOutlined />,
-    label: '菜单1',
+    label: '首页',
     component:HomePage
   },
   {
     key: '/father',
     icon: <MenuFoldOutlined />,
-    label: '用户管理',
+    label: '系统管理',
     component:null,
     children: [
       {
         key: '/father/userList',
         icon: <VideoCameraOutlined />,
-        label: '用户列表',
+        label: '权限管理',
         component:UserList
       },
-      // {
-      //   key: '/father/userDetail/detail',
-      //   icon: <VideoCameraOutlined />,
-      //   label: '用户详情',
-      //   component:UserListDetail
-      // },
+      {
+        key: '/father/userDetail/detail',
+        icon: <VideoCameraOutlined />,
+        label: '菜单管理',
+        component:UserListDetail
+      }
+    ]
+  },
+  {
+    key: '/father/userDetail/detail',
+    icon: <VideoCameraOutlined />,
+    label: '资源管理',
+    component:null,
+    children: [
+      {
+        key: '/father/userList',
+        icon: <VideoCameraOutlined />,
+        label: '文件管理',
+        component:UserList
+      },
+      {
+        key: '/father/userDetail/detail',
+        icon: <VideoCameraOutlined />,
+        label: '音视频管理',
+        component:UserListDetail
+      },
     ]
   },
   {
     key: '/nonePage',
     icon: <UploadOutlined />,
-    label: '菜单 3',
+    label: '社区管理',
+    component:NonePage
+  },
+  {
+    key: '/nonePage',
+    icon: <UploadOutlined />,
+    label: '消息通知管理',
+    component:NonePage
+  },
+  {
+    key: '/nonePage',
+    icon: <UploadOutlined />,
+    label: '数据可视化',
+    component:NonePage
+  },
+  {
+    key: '/nonePage',
+    icon: <UploadOutlined />,
+    label: '高德地图',
+    component:NonePage
+  },
+  {
+    key: '/nonePage',
+    icon: <UploadOutlined />,
+    label: '低代码管理',
     component:NonePage
   },
 ]
