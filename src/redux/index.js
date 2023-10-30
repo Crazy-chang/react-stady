@@ -19,6 +19,11 @@ function stores(state = initData, action) {
       }
       return { ...state, token };
     }
+    case 'SETUSERINFO': {
+      console.log("user--action",action)
+      const { userInfo } = action
+      return { ...state, userInfo}
+    }
     case 'BREADCRUMB': {
       const { breadcrumbList } = action
       return {

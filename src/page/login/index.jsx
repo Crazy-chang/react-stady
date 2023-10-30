@@ -6,11 +6,12 @@ import axios from 'axios'
 import store from '../../redux/index';
 
 const Login = () => {
-
+       
     const history = useHistory()
     const onFinish = (values) => {
         axios.post('/user/login',values).then(res => {
             store.dispatch({type:'SETTOKEN','token':res.data.token})
+            store.dispatch({type:'SETUSERINFO','userInfo':res.data})
             message.success('登录成功')
             history.push('/homePage')
         })
@@ -28,7 +29,7 @@ const Login = () => {
                     maxWidth: 300,
                 }}
                 initialValues={{
-                    username: '佬6',
+                    username: '张三',
                     password: 6666
                 }}
                 onFinish={onFinish}
