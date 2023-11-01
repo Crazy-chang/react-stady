@@ -3,7 +3,9 @@ import Mock from 'mockjs';
 Mock.mock('/user/login', 'post', (params) => {
     return {
         ...JSON.parse(params.body),
-        token:'token12345678'
+        token:'token12345678',
+        userId:'userId123',
+        avatar:''
     }
 })
 
