@@ -11,13 +11,14 @@ import HomePage from "../home/index";
 import UserList from "../user/index";
 import UserListDetail from "../user/detail";
 import NonePage from "../none/index";
+import MapPage from "../mapPage/index";
 
 const routeItems = [
   {
     key: "/homePage",
     icon: <UserOutlined />,
-    label: '首页',
-    component:HomePage
+    label: "首页",
+    component: HomePage,
   },
   {
     key: "/father",
@@ -60,6 +61,12 @@ const routeItems = [
     ]
   },
   {
+    key: "/mapPage",
+    icon: <UploadOutlined />,
+    label: "高德地图",
+    component: MapPage,
+  },
+  {
     key: "/nonePage",
     icon: <UploadOutlined />,
     label: '社区管理',
@@ -75,12 +82,6 @@ const routeItems = [
     key: '/nonePage',
     icon: <UploadOutlined />,
     label: '数据可视化',
-    component:NonePage
-  },
-  {
-    key: '/nonePage',
-    icon: <UploadOutlined />,
-    label: '高德地图',
     component:NonePage
   },
   {
@@ -118,6 +119,7 @@ const RouteList = () => {
         path="/father/userDetail/detail/:id"
         component={UserListDetail}
       ></Route>
+      <Route exact path="/mapPage" component={MapPage}></Route>
       <Route exact path="/nonePage" component={NonePage}></Route>
       <Route
         exact
