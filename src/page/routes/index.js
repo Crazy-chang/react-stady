@@ -3,6 +3,7 @@ import {
   UserOutlined,
   MenuFoldOutlined,
   VideoCameraOutlined,
+  BarChartOutlined,
 } from "@ant-design/icons";
 
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -12,6 +13,7 @@ import UserList from "../user/index";
 import UserListDetail from "../user/detail";
 import NonePage from "../none/index";
 import MapPage from "../mapPage/index";
+import EchartPage from "../echartPage/index";
 
 const routeItems = [
   {
@@ -19,6 +21,18 @@ const routeItems = [
     icon: <UserOutlined />,
     label: "首页",
     component: HomePage,
+  },
+  {
+    key: "/mapPage",
+    icon: <UploadOutlined />,
+    label: "高德地图",
+    component: MapPage,
+  },
+  {
+    key: '/echartPage',
+    icon: <BarChartOutlined />,
+    label: '数据可视化',
+    component:EchartPage
   },
   {
     key: "/father",
@@ -61,12 +75,6 @@ const routeItems = [
     ]
   },
   {
-    key: "/mapPage",
-    icon: <UploadOutlined />,
-    label: "高德地图",
-    component: MapPage,
-  },
-  {
     key: "/nonePage",
     icon: <UploadOutlined />,
     label: '社区管理',
@@ -76,12 +84,6 @@ const routeItems = [
     key: '/nonePage',
     icon: <UploadOutlined />,
     label: '消息通知管理',
-    component:NonePage
-  },
-  {
-    key: '/nonePage',
-    icon: <UploadOutlined />,
-    label: '数据可视化',
     component:NonePage
   },
   {
@@ -120,6 +122,7 @@ const RouteList = () => {
         component={UserListDetail}
       ></Route>
       <Route exact path="/mapPage" component={MapPage}></Route>
+      <Route exact path="/echartPage" component={EchartPage}></Route>
       <Route exact path="/nonePage" component={NonePage}></Route>
       <Route
         exact
