@@ -1,0 +1,38 @@
+.title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.boxLeft {
+    width: 70%;
+    height: 75vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.userChat {
+    width: 100%;
+    text-align: end;
+}
+
+.imgwh {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.boxRight {
+    width: 29%;
+    margin-left: 10px;
+}
+.r-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+}

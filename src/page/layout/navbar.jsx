@@ -26,7 +26,7 @@ const navbar = () => {
 
   return (
     <div style={{ background: "#ddd", padding: "5px" }}>
-      <span style={{ background: "#fff", "margin-right": "10px" }}>
+      <span style={{ background: "#fff", "marginRight": "10px" }}>
         <Button onClick={goToPage} >首页</Button>
         {/* <CloseOutlined onClick={closeTag} /> */}
       </span>

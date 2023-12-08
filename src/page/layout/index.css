@@ -11,3 +11,10 @@
     margin: '24px 16px';
     padding: 24px;
 }
+.contentCls {
+    margin: 20px 0 20px 20px;
+    padding: 10px 5px 10px 20px;
+    min-height: 280px;
+    height: 80vh;
+    overflow-y: scroll;
+}

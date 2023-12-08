@@ -4,6 +4,8 @@ import {
   MenuFoldOutlined,
   VideoCameraOutlined,
   BarChartOutlined,
+  EnvironmentOutlined,
+  AmazonOutlined,
 } from "@ant-design/icons";
 
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -14,6 +16,7 @@ import UserListDetail from "../user/detail";
 import NonePage from "../none/index";
 import MapPage from "../mapPage/index";
 import EchartPage from "../echartPage/index";
+import OpenAi from "../openAi/index";
 
 const routeItems = [
   {
@@ -23,8 +26,14 @@ const routeItems = [
     component: HomePage,
   },
   {
+    key: '/openAi',
+    icon: <AmazonOutlined />,
+    label: 'OpenAi',
+    component:OpenAi
+  },
+  {
     key: "/mapPage",
-    icon: <UploadOutlined />,
+    icon: <EnvironmentOutlined />,
     label: "高德地图",
     component: MapPage,
   },
@@ -54,44 +63,44 @@ const routeItems = [
       }
     ]
   },
-  {
-    key: '/father/userDetail/detail',
-    icon: <VideoCameraOutlined />,
-    label: '资源管理',
-    component:null,
-    children: [
-      {
-        key: '/father/userList',
-        icon: <VideoCameraOutlined />,
-        label: '文件管理',
-        component:UserList
-      },
-      {
-        key: '/father/userDetail/detail',
-        icon: <VideoCameraOutlined />,
-        label: '音视频管理',
-        component:UserListDetail
-      },
-    ]
-  },
-  {
-    key: "/nonePage",
-    icon: <UploadOutlined />,
-    label: '社区管理',
-    component:NonePage
-  },
-  {
-    key: '/nonePage',
-    icon: <UploadOutlined />,
-    label: '消息通知管理',
-    component:NonePage
-  },
-  {
-    key: '/nonePage',
-    icon: <UploadOutlined />,
-    label: '低代码管理',
-    component:NonePage
-  },
+  // {
+  //   key: '/father/userDetail/detail',
+  //   icon: <VideoCameraOutlined />,
+  //   label: '资源管理',
+  //   component:null,
+  //   children: [
+  //     {
+  //       key: '/father/userList',
+  //       icon: <VideoCameraOutlined />,
+  //       label: '文件管理',
+  //       component:UserList
+  //     },
+  //     {
+  //       key: '/father/userDetail/detail',
+  //       icon: <VideoCameraOutlined />,
+  //       label: '音视频管理',
+  //       component:UserListDetail
+  //     },
+  //   ]
+  // },
+  // {
+  //   key: "/nonePage",
+  //   icon: <UploadOutlined />,
+  //   label: '社区管理',
+  //   component:NonePage
+  // },
+  // {
+  //   key: '/nonePage',
+  //   icon: <UploadOutlined />,
+  //   label: '消息通知管理',
+  //   component:NonePage
+  // },
+  // {
+  //   key: '/nonePage',
+  //   icon: <UploadOutlined />,
+  //   label: '低代码管理',
+  //   component:NonePage
+  // },
 ];
 
 const flatRoute = () => {
@@ -115,6 +124,7 @@ const RouteList = () => {
   return (
     <Switch>
       <Route exact path="/homePage" component={HomePage}></Route>
+      <Route exact path="/openAi" component={OpenAi}></Route>
       <Route exact path="/father/userList" component={UserList}></Route>
       <Route
         exact

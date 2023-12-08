@@ -9,6 +9,12 @@ const Login = () => {
        
     const history = useHistory()
     const onFinish = (values) => {
+        if(values.username !== 'admin'){
+            return message.error('账号不存在')
+        }
+        if(values.password !== 'zzc123456'){
+            return message.error('密码不正确')
+        }
         axios.post('/user/login',values).then(res => {
             store.dispatch({type:'SETTOKEN','token':res.data.token})
             store.dispatch({type:'SETUSERINFO','userInfo':res.data})
@@ -29,8 +35,8 @@ const Login = () => {
                     maxWidth: 300,
                 }}
                 initialValues={{
-                    username: '张三',
-                    password: 6666
+                    username: '',
+                    password: ''
                 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}

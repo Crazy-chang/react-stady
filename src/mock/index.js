@@ -6,7 +6,7 @@ Mock.mock('/user/login', 'post', (params) => {
         token:'token12345678',
         userId:'userId123',
         avatar:''
-    }
+    };
 })
 
 Mock.mock('/home/list', 'get', {

@@ -5,7 +5,8 @@ const initData = {
   token: null,
   status: false,
   userInfo: {},
-  breadcrumbList:[]
+  breadcrumbList:[],
+  useEquipment:'pc', // 使用设备 pc 、 phone
 }
 
 function stores(state = initData, action) {
@@ -29,6 +30,13 @@ function stores(state = initData, action) {
       return {
         ...state,
         breadcrumbList
+      }
+    }
+    case 'SETUSEEQUIPMENT': {
+      const { useEquipment } = action
+      return {
+        ...state,
+        useEquipment
       }
     }
     default:
