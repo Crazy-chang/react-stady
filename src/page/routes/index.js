@@ -17,6 +17,8 @@ import NonePage from "../none/index";
 import MapPage from "../mapPage/index";
 import EchartPage from "../echartPage/index";
 import OpenAi from "../openAi/index";
+import PublicContent from "../publicContent/index"
+import FlowChart  from "../flowChart/index"
 
 const routeItems = [
   {
@@ -24,6 +26,18 @@ const routeItems = [
     icon: <UserOutlined />,
     label: "首页",
     component: HomePage,
+  },
+  {
+    key: "/publicContent",
+    icon: <UploadOutlined />,
+    label: '内容管理',
+    component:PublicContent
+  },
+  {
+    key: '/flowChart',
+    icon: <AmazonOutlined />,
+    label: '流程图',
+    component:FlowChart
   },
   {
     key: '/openAi',
@@ -124,6 +138,8 @@ const RouteList = () => {
   return (
     <Switch>
       <Route exact path="/homePage" component={HomePage}></Route>
+      <Route exact path="/publicContent" component={PublicContent}></Route>
+      <Route exact path="/flowChart" component={FlowChart}></Route>
       <Route exact path="/openAi" component={OpenAi}></Route>
       <Route exact path="/father/userList" component={UserList}></Route>
       <Route

@@ -13,32 +13,43 @@ const LayoutPage = () => {
   const history = useHistory();
   const pathname = history.location.pathname;
   const [collapsed, setCollapsed] = useState(false);
-  const [userAgent, setUserAgent] = useState('pc');
+  const [userAgent, setUserAgent] = useState("pc");
   const [selectedKeys, setSelectedKeys] = useState([pathname]);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  
+
+  // 面包屑
+  const [breadcrumb, setBreadcrumb] = useState("首页");
+
   const flatRouteList = flatRoute();
 
   useEffect(() => {
-    const val = store.getState().useEquipment
-    setUserAgent(val)
-    val === 'phone' && setCollapsed(true)
+    const val = store.getState().useEquipment;
+    // console.log("asd1",store.getState().breadcrumbStr)
+    // setBreadcrumb(store.getState().breadcrumbStr)
+    
+    setUserAgent(val);
+    val === "phone" && setCollapsed(true);
   }, []);
 
   const onClickMenu = (e) => {
     history.push(e.key);
-
     if (e.keyPath.length > 0) {
       const arr = [];
-      e.keyPath.forEach((it) => {
+      let str = "";
+      e.keyPath.reverse(); // 数组倒序
+      e.keyPath.forEach((it, index) => {
         for (let i = 0; i < flatRouteList.length; i++) {
           if (it === flatRouteList[i].key) {
             arr.push(flatRouteList[i]);
+            str = `${str}${index >= 1 ? " / " : ""}${flatRouteList[i].label}`;
           }
         }
       });
+      setBreadcrumb(str);
+      store.dispatch({ type: "BREADCRUMB", 'breadcrumbStr': str });
+      // console.log("click ==", arr);
     }
   };
 
@@ -84,7 +95,7 @@ const LayoutPage = () => {
             ) : (
               ""
             )}
-            <div>用户管理 / 用户列表页</div>
+            <div>{breadcrumb}</div>
           </div>
           <div
             style={{ padding: "0 20px", cursor: "pointer" }}

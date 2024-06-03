@@ -1,31 +1,51 @@
-import Axios from 'axios'
+import Axios from "axios";
+import { message } from "antd";
 
 const config = {
-    baseURL: '',
-    timeout: 3000,
-    headers: {
-        Accept: "application/json, text/plain, */*",
-        "X-Requested-With": "XMLHttpRequest",
-        "Content-Type": "application/json"
-    }
-}
+  baseURL: "http://localhost:3000",
+  //   baseURL: "http://192.168.1.17:3000",
+  timeout: 3000,
+  headers: {
+    // Accept: "application/json, text/plain, */*",
+    // "X-Requested-With": "XMLHttpRequest",
+    "Content-Type": "application/json;charset=utf-8",
+  },
+};
 
 const instance = Axios.create(config);
 
 // 添加请求拦截器
-instance.interceptors.request.use((config) => {
-    console.log('1', config)
-}, (error) => {
-    console.log('21', error)
+instance.interceptors.request.use(
+  (config) => {
+    console.log("添加请求拦截器=1", config);
+    const token = sessionStorage.getItem("token") || null;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
     return Promise.reject(error);
-})
+  }
+);
 // 添加响应拦截器
-instance.interceptors.response.use((response) => {
-    console.log('3', response)
-
-}, (error) => {
-    console.log('4', error)
+instance.interceptors.response.use(
+  (response) => {
+    console.log("添加响应拦截器=3", response);
+    if (response.data.code === 200) {
+      return Promise.resolve(response.data);
+    } else {
+      message.error(response.data.message);
+      return Promise.resolve({
+        code: response.data.code,
+        message: response.data.message,
+      });
+    }
+  },
+  (error) => {
+    console.log("添加响应拦截器失败", error);
     return Promise.reject(error);
-})
+  }
+);
 
 export default instance;
