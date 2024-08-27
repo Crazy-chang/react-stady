@@ -193,7 +193,6 @@ const FlowChart = () => {
   }, []);
 
   const downloadImage = () => {
-    console.log("哈市",lf)
     lf.getSnapshot();
   };
 

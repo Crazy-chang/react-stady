@@ -13,6 +13,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "../home/index";
 import UserList from "../user/index";
 import UserListDetail from "../user/detail";
+import AccountManage from "../user/accountManage";
 import NonePage from "../none/index";
 import MapPage from "../mapPage/index";
 import EchartPage from "../echartPage/index";
@@ -20,6 +21,7 @@ import OpenAi from "../openAi/index";
 import PublicContent from "../publicContent/index"
 import FlowChart  from "../flowChart/index"
 
+// 左侧菜单
 const routeItems = [
   {
     key: "/homePage",
@@ -74,7 +76,13 @@ const routeItems = [
         icon: <VideoCameraOutlined />,
         label: '菜单管理',
         component:UserListDetail
-      }
+      },
+      {
+        key: '/father/accountManage',
+        icon: <VideoCameraOutlined />,
+        label: '账号管理',
+        component:AccountManage
+      },
     ]
   },
   // {
@@ -134,6 +142,7 @@ const flatRoute = () => {
   return arr;
 };
 
+// 菜单对应得页面
 const RouteList = () => {
   return (
     <Switch>
@@ -142,6 +151,8 @@ const RouteList = () => {
       <Route exact path="/flowChart" component={FlowChart}></Route>
       <Route exact path="/openAi" component={OpenAi}></Route>
       <Route exact path="/father/userList" component={UserList}></Route>
+      <Route exact path="/father/accountManage" component={AccountManage}></Route>
+      <Route exact path="/father/userDetail/detail" component={UserListDetail}></Route>
       <Route
         exact
         path="/father/userDetail/detail/:id"

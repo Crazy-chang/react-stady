@@ -2,8 +2,8 @@ import Axios from "axios";
 import { message } from "antd";
 
 const config = {
-  baseURL: "http://localhost:3000",
-  //   baseURL: "http://192.168.1.17:3000",
+  // baseURL: "http://localhost:3000",
+  baseURL: "https://sf.gdvision.org.cn/corneaSys/api",
   timeout: 3000,
   headers: {
     // Accept: "application/json, text/plain, */*",
@@ -17,11 +17,18 @@ const instance = Axios.create(config);
 // 添加请求拦截器
 instance.interceptors.request.use(
   (config) => {
-    console.log("添加请求拦截器=1", config);
+    // console.log("添加请求拦截器=1", config);
     const token = sessionStorage.getItem("token") || null;
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      // config.headers["Authorization"] = `Bearer ${token}`;
+      // tyg api token
+      config.headers["Access-Token"] = token;
     }
+    config.data = {
+      body: config.data,
+      header: { token, timestamp: +new Date() },
+    };
+
     return config;
   },
   (error) => {
@@ -31,8 +38,8 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   (response) => {
-    console.log("添加响应拦截器=3", response);
-    if (response.data.code === 200) {
+    // console.log("添加响应拦截器=3", response);
+    if ([0, "0"].includes(response.data.code)) {
       return Promise.resolve(response.data);
     } else {
       message.error(response.data.message);
