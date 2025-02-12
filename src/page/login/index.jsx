@@ -18,25 +18,25 @@ const Login = () => {
     // if(values.password !== '666666'){
     //     return message.error('密码不正确')
     // }
-    login({
-      userAccount: data.userAccount,
-      password: Md5(data.password),
-    }).then((res) => {
-      console.log("hjahaha哈哈哈", res);
-      if (res.code == 0) {
-        store.dispatch({ type: "SETTOKEN", token: res.data.token });
-        store.dispatch({ type: "SETUSERINFO", userInfo: res.data });
-        message.success("登录成功");
-        history.push("/homePage");
-      }
-    });
+    // login({
+    //   userAccount: data.userAccount,
+    //   password: Md5(data.password),
+    // }).then((res) => {
+    //   console.log("hjahaha哈哈哈", res);
+    //   if (res.code == 0) {
+    //     store.dispatch({ type: "SETTOKEN", token: res.data.token });
+    //     store.dispatch({ type: "SETUSERINFO", userInfo: res.data });
+    //     message.success("登录成功");
+    //     history.push("/homePage");
+    //   }
+    // });
     // mock 数据
-    // axios.post('/user/login',values).then(res => {
-    //     store.dispatch({type:'SETTOKEN','token':res.data.token})
-    //     store.dispatch({type:'SETUSERINFO','userInfo':res.data})
-    //     message.success('登录成功')
-    //     history.push('/homePage')
-    // })
+    axios.post('/user/login',values).then(res => {
+        store.dispatch({type:'SETTOKEN','token':res.data.token})
+        store.dispatch({type:'SETUSERINFO','userInfo':res.data})
+        message.success('登录成功')
+        history.push('/homePage')
+    })
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

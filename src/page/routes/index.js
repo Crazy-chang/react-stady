@@ -32,7 +32,7 @@ const routeItems = [
   {
     key: "/publicContent",
     icon: <UploadOutlined />,
-    label: '内容管理',
+    label: '加入房间测试',
     component:PublicContent
   },
   {
@@ -153,20 +153,11 @@ const RouteList = () => {
       <Route exact path="/father/userList" component={UserList}></Route>
       <Route exact path="/father/accountManage" component={AccountManage}></Route>
       <Route exact path="/father/userDetail/detail" component={UserListDetail}></Route>
-      <Route
-        exact
-        path="/father/userDetail/detail/:id"
-        component={UserListDetail}
-      ></Route>
+      <Route exact path="/father/userDetail/detail/:id" component={UserListDetail} />
       <Route exact path="/mapPage" component={MapPage}></Route>
       <Route exact path="/echartPage" component={EchartPage}></Route>
       <Route exact path="/nonePage" component={NonePage}></Route>
-      <Route
-        exact
-        render={() => {
-          <div>404</div>;
-        }}
-      />
+      <Route exact render={() => { <div>404</div> }} />
       <Redirect from="/" to="/homePage" />
     </Switch>
   );

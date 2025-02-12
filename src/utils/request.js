@@ -2,8 +2,7 @@ import Axios from "axios";
 import { message } from "antd";
 
 const config = {
-  // baseURL: "http://localhost:3000",
-  baseURL: "https://sf.gdvision.org.cn/corneaSys/api",
+  baseURL: "http://localhost:3000",
   timeout: 3000,
   headers: {
     // Accept: "application/json, text/plain, */*",
