@@ -32,7 +32,7 @@ const routeItems = [
   {
     key: "/publicContent",
     icon: <UploadOutlined />,
-    label: '加入房间测试',
+    label: 'socket测试',
     component:PublicContent
   },
   {
